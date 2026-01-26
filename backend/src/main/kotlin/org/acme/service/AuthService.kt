@@ -5,6 +5,8 @@ import io.quarkus.security.identity.SecurityIdentity
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 import jakarta.transaction.Transactional
+import jakarta.ws.rs.core.Context
+import jakarta.ws.rs.core.HttpHeaders
 import org.acme.domain.entity.MagicLink
 import org.acme.domain.entity.User
 import org.eclipse.microprofile.config.inject.ConfigProperty
@@ -20,6 +22,9 @@ class AuthService {
 
     @Inject
     lateinit var securityIdentity: SecurityIdentity
+    
+    @Context
+    lateinit var httpHeaders: HttpHeaders
 
     @ConfigProperty(name = "app.magic-link.expiration-minutes")
     var expirationMinutes: Int = 15
@@ -100,6 +105,22 @@ class AuthService {
     }
 
     fun getCurrentUser(): User? {
+        // First check for cookie-based authentication
+        val cookieValue = httpHeaders.getCookies()["user_session"]?.value
+        System.out.println("Cookie value: $cookieValue")
+        if (cookieValue != null) {
+            try {
+                val userId = UUID.fromString(cookieValue)
+                val user = User.findById(userId)
+                if (user != null && user.isActive) {
+                    return user
+                }
+            } catch (e: Exception) {
+                // Invalid cookie, continue to check OIDC
+            }
+        }
+        
+        // Fallback to OIDC authentication
         if (securityIdentity.isAnonymous) {
             return null
         }

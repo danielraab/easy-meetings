@@ -24,9 +24,14 @@ async function fetchWithAuth(url: string, options: ApiOptions = {}) {
     throw new Error('Unauthorized');
   }
 
+  if (response.status === 403) {
+    const errorText = await response.text();
+    throw new Error(`Forbidden (403): ${errorText || 'Access denied'}`);
+  }
+
   if (!response.ok) {
     const error = await response.json().catch(() => ({ error: 'An error occurred' }));
-    throw new Error(error.error || 'An error occurred');
+    throw new Error(error.error || `An error occurred. status ${response.status}`);
   }
 
   if (response.status === 204) {
