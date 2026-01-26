@@ -31,6 +31,7 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Quarkus Core -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-jackson</artifactId>
@@ -47,9 +48,80 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest</artifactId>
         </dependency>
+
+        <!-- Database -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-orm-panache-kotlin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-flyway</artifactId>
+        </dependency>
+
+        <!-- Redis -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-redis-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-redis-client</artifactId>
+        </dependency>
+
+        <!-- Security & Authentication -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-oidc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-security</artifactId>
+        </dependency>
+
+        <!-- Email -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-mailer</artifactId>
+        </dependency>
+
+        <!-- OpenAPI Documentation -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
+        </dependency>
+
+        <!-- Validation -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-validator</artifactId>
+        </dependency>
+
+        <!-- JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+        </dependency>
+
+        <!-- Kotlin -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+        </dependency>
+
+        <!-- Testing -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5-mockito</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -58,12 +130,24 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>kotlin-extensions</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-test-security</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito.kotlin</groupId>
+            <artifactId>mockito-kotlin</artifactId>
+            <version>5.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jacoco</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
