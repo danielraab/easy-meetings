@@ -1,4 +1,5 @@
 package org.acme.service
+import java.util.UUID
 
 import io.quarkus.security.identity.SecurityIdentity
 import jakarta.enterprise.context.ApplicationScoped

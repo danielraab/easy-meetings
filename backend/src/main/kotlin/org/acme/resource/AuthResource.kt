@@ -1,4 +1,5 @@
 package org.acme.resource
+import java.util.UUID
 
 import jakarta.inject.Inject
 import jakarta.transaction.Transactional

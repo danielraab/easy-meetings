@@ -1,4 +1,5 @@
 package org.acme.service
+import java.util.UUID
 
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
@@ -9,7 +10,6 @@ import org.acme.domain.dto.*
 import org.acme.domain.entity.*
 import org.acme.mapper.EntityMapper
 import java.time.LocalDateTime
-import java.util.*
 
 @ApplicationScoped
 class MeetingSeriesService {

@@ -1,4 +1,5 @@
 package org.acme.service
+import java.util.UUID
 
 import io.quarkus.mailer.Mail
 import io.quarkus.mailer.Mailer

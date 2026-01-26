@@ -1,8 +1,8 @@
 package org.acme.domain.dto
+import java.util.UUID
 
 import org.acme.domain.entity.UserRole
 import java.time.LocalDateTime
-import java.util.*
 
 // Meeting Series DTOs
 data class MeetingSeriesDto(

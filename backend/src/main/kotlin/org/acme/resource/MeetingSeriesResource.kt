@@ -1,4 +1,5 @@
 package org.acme.resource
+import java.util.UUID
 
 import jakarta.inject.Inject
 import jakarta.validation.Valid
@@ -9,7 +10,6 @@ import org.acme.domain.dto.*
 import org.acme.service.MeetingSeriesService
 import org.eclipse.microprofile.openapi.annotations.Operation
 import org.eclipse.microprofile.openapi.annotations.tags.Tag
-import java.util.*
 
 @Path("/api/meeting-series")
 @Produces(MediaType.APPLICATION_JSON)

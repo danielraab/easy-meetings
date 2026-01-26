@@ -1,5 +1,6 @@
 package org.acme.domain.entity
 
+import io.quarkus.hibernate.orm.panache.kotlin.PanacheCompanion
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheEntityBase
 import jakarta.persistence.*
 import java.time.LocalDateTime
@@ -42,7 +43,9 @@ class User : PanacheEntityBase {
         updatedAt = LocalDateTime.now()
     }
 
-    companion object {
+    companion object : PanacheCompanion<User> {
+        fun findById(id: UUID): User? = find("id", id).firstResult()
+        
         fun findByEmail(email: String): User? = find("email", email).firstResult()
         
         fun findByOAuth(provider: String, subject: String): User? = 

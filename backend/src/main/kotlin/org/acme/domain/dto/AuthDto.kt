@@ -1,6 +1,5 @@
 package org.acme.domain.dto
-
-import java.util.*
+import java.util.UUID
 
 data class UserDto(
     val id: UUID?,

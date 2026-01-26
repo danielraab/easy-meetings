@@ -1,6 +1,8 @@
 package org.acme.domain.entity
 
+import io.quarkus.hibernate.orm.panache.kotlin.PanacheCompanion
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheEntityBase
+import io.quarkus.hibernate.orm.panache.kotlin.PanacheEntity
 import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.*
@@ -30,7 +32,9 @@ class AppointmentMember : PanacheEntityBase {
     @Column(name = "created_at", nullable = false, updatable = false)
     var createdAt: LocalDateTime = LocalDateTime.now()
 
-    companion object {
+    companion object : PanacheCompanion<AppointmentMember> {
+        fun findById(id: UUID): AppointmentMember? = find("id", id).firstResult()
+        
         fun findByAppointment(appointmentId: UUID): List<AppointmentMember> = 
             list("appointment.id", appointmentId)
     }
