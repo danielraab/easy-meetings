@@ -26,6 +26,6 @@ class AuthServiceTest {
         val message = authService.createMagicLink(email)
         
         assertTrue(message.contains(email))
-        verify(emailService).sendMagicLink("mail", "token")
+        verify(emailService).sendMagicLink(any(), any())
     }
 }

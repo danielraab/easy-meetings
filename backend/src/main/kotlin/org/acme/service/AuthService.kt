@@ -107,7 +107,6 @@ class AuthService {
     fun getCurrentUser(): User? {
         // First check for cookie-based authentication
         val cookieValue = httpHeaders.getCookies()["user_session"]?.value
-        System.out.println("Cookie value: $cookieValue")
         if (cookieValue != null) {
             try {
                 val userId = UUID.fromString(cookieValue)

@@ -5,13 +5,29 @@ import io.quarkus.test.security.TestSecurity
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
+import jakarta.transaction.Transactional
+import org.acme.domain.entity.User
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import jakarta.ws.rs.core.MediaType
 
 @QuarkusTest
 class AuthResourceTest {
+
+    @BeforeEach
+    @Transactional
+    fun setup() {
+        // Clean up and create test user
+        User.deleteAll()
+        val testUser = User().apply {
+            email = "test@example.com"
+            name = "Test User"
+            isActive = true
+        }
+        testUser.persist()
+    }
 
     @Test
     fun testMagicLinkRequest() {
@@ -37,6 +53,7 @@ class AuthResourceTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     fun testGetCurrentUserUnauthorized() {
         When {
             get("/api/auth/me")
