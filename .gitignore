@@ -16,6 +16,7 @@ frontend/out/
 frontend/build/
 frontend/.turbo/
 frontend/coverage/
+/.pnpm-store/
 
 # IDE
 .idea/

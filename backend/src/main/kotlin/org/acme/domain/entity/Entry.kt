@@ -4,6 +4,8 @@ import io.quarkus.hibernate.orm.panache.kotlin.PanacheCompanion
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheEntityBase
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheEntity
 import jakarta.persistence.*
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.type.SqlTypes
 import java.time.LocalDateTime
 import java.util.*
 
@@ -24,6 +26,7 @@ class Entry : PanacheEntityBase {
     var appointment: Appointment? = null
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "entry_type", nullable = false, columnDefinition = "entry_type")
     var entryType: EntryType = EntryType.COMMENT
 
@@ -39,6 +42,7 @@ class Entry : PanacheEntityBase {
     var assignedTo: User? = null
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "task_status", columnDefinition = "task_status")
     var taskStatus: TaskStatus? = null
 

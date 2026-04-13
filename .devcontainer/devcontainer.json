@@ -25,7 +25,7 @@
   },
 
   // Install frontend dependencies after the container is created.
-  "postCreateCommand": "cd /workspace/frontend && npm install",
+  "postCreateCommand": "cd /workspace/frontend && pnpm install",
 
   "customizations": {
     "vscode": {
@@ -34,11 +34,11 @@
         "java.configuration.runtimes": [
           {
             "name": "JavaSE-21",
-            "path": "/usr/lib/jvm/msft-21-amd64",
+            "path": "/usr/lib/jvm/msopenjdk-current",
             "default": true
           }
         ],
-        "java.home": "/usr/lib/jvm/msft-21-amd64",
+        "java.home": "/usr/lib/jvm/msopenjdk-current",
         // TypeScript / Next.js
         "typescript.tsdk": "frontend/node_modules/typescript/lib",
         "editor.defaultFormatter": "esbenp.prettier-vscode",
