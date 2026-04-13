@@ -1,0 +1,80 @@
+{
+  "name": "Easy Meetings (Frontend + Backend)",
+
+  // Use the existing docker-compose.yml for infra services, extended by
+  // docker-compose.devcontainer.yml which defines the workspace container.
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.devcontainer.yml"
+  ],
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace",
+
+  // Stop all compose services when the editor window is closed.
+  "shutdownAction": "stopCompose",
+
+  // Forward ports for both apps and all backing services.
+  "forwardPorts": [3000, 8080, 5432, 6379, 1025, 8025],
+  "portsAttributes": {
+    "3000": { "label": "Next.js Frontend", "onAutoForward": "notify" },
+    "8080": { "label": "Quarkus Backend", "onAutoForward": "notify" },
+    "5432": { "label": "PostgreSQL", "onAutoForward": "silent" },
+    "6379": { "label": "Redis", "onAutoForward": "silent" },
+    "1025": { "label": "MailHog SMTP", "onAutoForward": "silent" },
+    "8025": { "label": "MailHog UI", "onAutoForward": "notify" }
+  },
+
+  // Install frontend dependencies after the container is created.
+  "postCreateCommand": "cd /workspace/frontend && npm install",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Java / Quarkus
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-21",
+            "path": "/usr/lib/jvm/msft-21-amd64",
+            "default": true
+          }
+        ],
+        "java.home": "/usr/lib/jvm/msft-21-amd64",
+        // TypeScript / Next.js
+        "typescript.tsdk": "frontend/node_modules/typescript/lib",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[kotlin]": {
+          "editor.defaultFormatter": "fwcd.kotlin"
+        },
+        // Test coverage
+        "coverage-gutters.coverageFileNames": [
+          "jacoco.xml"
+        ]
+      },
+      "extensions": [
+        // Kotlin & Java
+        "fwcd.kotlin",
+        "redhat.java",
+        "vscjava.vscode-gradle",
+        "vscjava.vscode-maven",
+        "vscjava.vscode-java-test",
+        "vscjava.vscode-java-debug",
+        // Quarkus
+        "redhat.vscode-quarkus",
+        "redhat.vscode-xml",
+        "redhat.vscode-yaml",
+        // Next.js / TypeScript / React
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        // Database
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg",
+        // General DX
+        "eamodio.gitlens",
+        "ms-azuretools.vscode-docker",
+        "ryanluker.vscode-coverage-gutters",
+        "humao.rest-client"
+      ]
+    }
+  }
+}
